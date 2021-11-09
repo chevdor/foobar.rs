@@ -63,6 +63,8 @@ jobs:
             echo "{% include \"prs/$file\" %}" >> templates/dyn.md
           done
 
+          cat templates/dyn.md
+
           jq \
             --slurpfile cl $CL_FILE \
             -n '{ cl: $cl[0] }' | tee context.json
