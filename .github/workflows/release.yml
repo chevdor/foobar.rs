@@ -38,7 +38,7 @@ jobs:
 
       - name: Install changelogerator
         run: |
-          gem install changelogerator
+          gem install changelogerator --with=dev
           changelogerator --help
 
       - name: Generate changelog
