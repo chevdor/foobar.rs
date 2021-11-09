@@ -55,16 +55,18 @@ jobs:
 
           changelogerator $REPO -f $REF1 -t $REF2 > $CL_FILE
 
-          echo "" >> templates/template.md
+          cp templates/template.md templates/dyn.md
+          echo "" >> templates/dyn.md
           for f in $(git diff --name-only $REF1..$REF2 doc); do
-            echo "{% include '$f' %}" >> templates/template.md
+            file=$(basename $f)
+            echo "{% include \"prs/$file\" %}" >> templates/dyn.md
           done
 
           jq \
             --slurpfile cl $CL_FILE \
             -n '{ cl: $cl[0] }' | tee context.json
 
-          tera --env --env-key env --include-path templates/ --template templates/template.md context.json | tee changelog.md
+          tera --env --env-key env --include-path doc/ --template templates/dyn.md context.json | tee changelog.md
 
           cat changelog.md
 

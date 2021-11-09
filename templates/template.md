@@ -10,4 +10,3 @@ Number of changes: {{ cl.changes | length }}
 {%- else -%}
 No change found between {{ env.REF1 }} and {{ env.REF2 }}
 {%- endif -%}
-{% include "doc/junk.txt" %}
