@@ -38,6 +38,7 @@ jobs:
 
       - name: Install changelogerator
         run: |
+          gem install pry
           gem install changelogerator --with=dev
           changelogerator --help
 
